@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Meeting • Quick Meet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <h1>Quick Meet</h1>
+        <p id="room-link-text"></p>
+      </header>
+      <main class="room-main">
+        <div class="video-grid" id="video-grid"></div>
+        <div class="controls">
+          <button id="toggle-mic-btn" class="secondary-btn">Mute</button>
+          <button id="toggle-camera-btn" class="secondary-btn">Stop Video</button>
+          <button id="leave-btn" class="danger-btn">Leave</button>
+        </div>
+      </main>
+      <footer class="app-footer">
+        <span>Share this page link so others can join.</span>
+      </footer>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/room.js"></script>
+  </body>
+  </html>
+

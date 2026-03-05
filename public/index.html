@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Quick Meet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <h1>Quick Meet</h1>
+        <p>Create a link and start a video call in seconds.</p>
+      </header>
+      <main class="home-main">
+        <button id="create-meeting-btn" class="primary-btn">
+          Create new meeting
+        </button>
+        <div class="join-section">
+          <p>Or paste a meeting link to join:</p>
+          <input
+            id="join-link-input"
+            type="text"
+            placeholder="https://example.com/room/abc123"
+          />
+          <button id="join-link-btn" class="secondary-btn">Join</button>
+        </div>
+      </main>
+      <footer class="app-footer">
+        <span>Runs locally on your computer.</span>
+      </footer>
+    </div>
+    <script src="main.js"></script>
+  </body>
+  </html>
+
