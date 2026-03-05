@@ -12,6 +12,11 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Health check for keep-alive pings (keeps Render free tier from spinning down)
+app.get('/health', (req, res) => {
+  res.send('ok');
+});
+
 app.get('/room/:roomId', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'room.html'));
 });

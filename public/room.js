@@ -2,6 +2,34 @@ const roomId = window.location.pathname.split('/').pop();
 const socket = io();
 
 const videoGrid = document.getElementById('video-grid');
+const connectingOverlay = document.getElementById('connecting-overlay');
+const connectingHint = document.getElementById('connecting-hint');
+
+function hideConnectingOverlay() {
+  if (connectingOverlay) connectingOverlay.classList.add('hidden');
+}
+
+function showWakeUpHint() {
+  if (connectingHint) {
+    connectingHint.textContent = 'Server is waking up (free hosting). Wait 30–60 seconds and refresh the page.';
+  }
+}
+
+// Hide overlay once connected so people can join again next time
+socket.on('connect', () => {
+  hideConnectingOverlay();
+});
+
+socket.on('connect_error', () => {
+  showWakeUpHint();
+});
+
+// If still not connected after 12s, show wake-up message
+setTimeout(() => {
+  if (!socket.connected && connectingOverlay && !connectingOverlay.classList.contains('hidden')) {
+    showWakeUpHint();
+  }
+}, 12000);
 const roomLinkText = document.getElementById('room-link-text');
 
 const toggleMicBtn = document.getElementById('toggle-mic-btn');
@@ -85,7 +113,11 @@ function createPeerConnection(peerId) {
   return pc;
 }
 
-socket.emit('join-room', roomId);
+// Join room when connected (and on reconnect after server wake-up)
+function doJoinRoom() {
+  socket.emit('join-room', roomId);
+}
+socket.on('connect', doJoinRoom);
 
 socket.on('existing-users', async users => {
   if (!localStream) {

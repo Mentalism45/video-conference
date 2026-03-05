@@ -34,3 +34,15 @@ Then open `http://localhost:4000` in your browser.
 2. Copy that URL and send it to someone else on your network.
 3. When they open the link, both of you will see each other’s video (after granting camera/mic permissions).
 
+## Deployed on Render (free tier)
+
+If you deploy to Render, the free tier **spins down after ~15 minutes of inactivity**. The next visitor then has to wait 30–60 seconds while the server wakes up, and the app shows “Connecting to server…” / “Server is waking up…”.
+
+**Keep the service awake** so people can join anytime:
+
+1. Use a free cron service (e.g. **cron-job.org** or **UptimeRobot**).
+2. Ping your app’s health URL every **14 minutes**:
+   - `https://your-app-name.onrender.com/health`
+3. That keeps the service from spinning down so links work on the first try.
+
+After you push the new code to GitHub, Render will auto-deploy. No extra config on Render is needed.
